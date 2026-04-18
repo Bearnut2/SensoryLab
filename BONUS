@@ -1,0 +1,13 @@
+public function store(Request $request)
+{
+    $request->validate([
+        'product_name' => 'required',
+        'product_code' => 'required|unique:batches',
+        'batch_number' => 'required|unique:batches',
+        'date_created' => 'required|date'
+    ]);
+
+    Batch::create($request->all());
+
+    return redirect()->back()->with('success', 'Batch created!');
+}
