@@ -35,3 +35,59 @@
 ---
 
 ## 🧩 ERD (ASCII)
+
+batches
++-------------------+
+| id (PK) |
+| product_name |
+| product_code (UQ) |
+| batch_number (UQ) |
+| date_created |
++-------------------+
+|
+| 1
+|
+| *
++-------------------+
+| test_data |
++-------------------+
+| id (PK) |
+| batch_id (FK) |
+| parameter_name |
+| value |
+| measurement_unit |
++-------------------+
+
+---
+
+## 📌 Constraint
+- product_code → unique
+- batch_number → unique
+- batch_id → foreign key (cascade delete)
+
+---
+
+## ⚡ Indexing
+- index(batch_id, parameter_name) → mempercepat query filter
+
+---
+
+## 🧪 Dummy Data
+
+### batches
+1. Keripik Singkong | P001 | B001
+2. Kerupuk Udang | P002 | B002
+3. Snack Jagung | P003 | B003
+
+### test_data
+- pH, 6.5
+- Suhu, 30°C
+- Kekerasan, 12
+
+---
+
+## 🔄 Alur Sistem
+1. QC membuat batch
+2. Sistem menyimpan data batch
+3. QC input test_data
+4. Data tersimpan dan terhubung ke batch
